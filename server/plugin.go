@@ -7,7 +7,18 @@ import (
 
 	"github.com/mattermost/mattermost-server/v6/model"
 	"github.com/mattermost/mattermost-server/v6/plugin"
+
+	"database/sql"
+	"fmt"
+
+	_ "github.com/go-sql-driver/mysql"
 )
+
+type ldapuser struct {
+	userid  string
+	email   string
+	manager string
+}
 
 type Plugin struct {
 	plugin.MattermostPlugin
@@ -63,7 +74,8 @@ func (p *Plugin) handleGetAttributes(w http.ResponseWriter, r *http.Request) {
 			continue
 		}
 		if sliceContainsString(ca.UserIDs, userID) || sliceContainsUserTeam(ca.TeamIDs, usersTeams) || sliceContainsUserGroup(ca.GroupIDs, usersGroups) {
-			attributes = append(attributes, "ca.Name")
+			var manager string = selectid(userID)
+			attributes = append(attributes, manager)
 		}
 	}
 
@@ -109,4 +121,30 @@ func sliceContainsUserGroup(arr []string, userGroups []*model.Group) bool {
 		}
 	}
 	return false
+}
+
+func selectid(id string) string {
+	db, err := sql.Open("mysql", "mattermost:mattermost@tcp(172.23.12.38:3306)/mattermost")
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+	var sqlselect string = fmt.Sprintf("select * from mattermost.mm_manager WHERE UserID IN ('%s')", id)
+
+	rows, err := db.Query(sqlselect)
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
+	rows.Next()
+	p := ldapuser{}
+	error := rows.Scan(&p.userid, &p.email, &p.manager)
+
+	if error != nil {
+		panic(err)
+	}
+
+	return p.manager
+
 }
