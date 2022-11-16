@@ -63,7 +63,7 @@ func (p *Plugin) handleGetAttributes(w http.ResponseWriter, r *http.Request) {
 			continue
 		}
 		if sliceContainsString(ca.UserIDs, userID) || sliceContainsUserTeam(ca.TeamIDs, usersTeams) || sliceContainsUserGroup(ca.GroupIDs, usersGroups) {
-			attributes = append(attributes, ca.Name)
+			attributes = append(attributes, "ca.Name")
 		}
 	}
 

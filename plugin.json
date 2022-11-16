@@ -1,7 +1,7 @@
 {
-    "id": "com.mattermost.custom-attributes",
-    "name": "Custom User Attributes",
-    "description": "Add custom user attributes to the Mattermost user profile popover.",
+    "id": "mattermost-ldap-attributes",
+    "name": "ldap Attributes",
+    "description": "Add ldap attributes to the Mattermost user profile popover.",
     "homepage_url": "https://github.com/mattermost/mattermost-plugin-custom-attributes",
     "support_url": "https://github.com/mattermost/mattermost-plugin-custom-attributes/issues",
     "release_notes_url": "https://github.com/mattermost/mattermost-plugin-custom-attributes/releases/tag/v1.3.0",

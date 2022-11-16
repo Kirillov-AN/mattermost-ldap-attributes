@@ -1,4 +1,4 @@
-module github.com/mattermost/mattermost-plugin-custom-attributes/server
+module github.com/Kirillov-AN/mattermost-ldap-attributes/server
 
 go 1.12
 
