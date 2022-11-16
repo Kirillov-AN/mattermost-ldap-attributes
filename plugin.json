@@ -1,5 +1,5 @@
 {
-    "id": "mattermost-ldap-attributes",
+    "id": "mattermost.ldap.attributes",
     "name": "ldap Attributes",
     "description": "Add ldap attributes to the Mattermost user profile popover.",
     "homepage_url": "https://github.com/mattermost/mattermost-plugin-custom-attributes",
