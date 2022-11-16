@@ -74,7 +74,7 @@ func (p *Plugin) handleGetAttributes(w http.ResponseWriter, r *http.Request) {
 			continue
 		}
 		if sliceContainsString(ca.UserIDs, userID) || sliceContainsUserTeam(ca.TeamIDs, usersTeams) || sliceContainsUserGroup(ca.GroupIDs, usersGroups) {
-			var manager string = selectid(userID)
+			var manager = selectid(userID)
 			attributes = append(attributes, manager)
 		}
 	}
@@ -129,7 +129,7 @@ func selectid(id string) string {
 		panic(err)
 	}
 	defer db.Close()
-	var sqlselect string = fmt.Sprintf("select * from mattermost.mm_manager WHERE UserID IN ('%s')", id)
+	var sqlselect = fmt.Sprintf("select * from mattermost.mm_manager WHERE UserID IN ('%s')", id)
 
 	rows, err := db.Query(sqlselect)
 	if err != nil {
@@ -142,9 +142,8 @@ func selectid(id string) string {
 	error := rows.Scan(&p.userid, &p.email, &p.manager)
 
 	if error != nil {
-		panic(err)
+		p.manager = "Error connect to db"
 	}
 
 	return p.manager
-
 }
