@@ -147,5 +147,7 @@ func selectid(id string) string {
 		p.manager = "Error connect to db"
 	}
 
-	return p.manager
+	var result = "Руководитель: " + p.manager
+	return result
+
 }
