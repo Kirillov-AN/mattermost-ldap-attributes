@@ -67,13 +67,13 @@ func (p *Plugin) handleGetAttributes(w http.ResponseWriter, r *http.Request) {
 	}
 
 	attributes := []string{}
-	usersTeams, _ := p.API.GetTeamsForUser(userID)
-	usersGroups, _ := p.API.GetGroupsForUser(userID)
+	//	usersTeams, _ := p.API.GetTeamsForUser(userID)
+	//	usersGroups, _ := p.API.GetGroupsForUser(userID)
 	for _, ca := range config.CustomAttributes {
 		if ca.UserIDs == nil && ca.TeamIDs == nil && ca.GroupIDs == nil {
 			continue
 		}
-		if sliceContainsString(ca.UserIDs, userID) || sliceContainsUserTeam(ca.TeamIDs, usersTeams) || sliceContainsUserGroup(ca.GroupIDs, usersGroups) {
+		if true {
 			var manager = selectid(userID)
 			attributes = append(attributes, manager)
 		}
