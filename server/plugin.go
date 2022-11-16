@@ -126,7 +126,7 @@ func sliceContainsUserGroup(arr []string, userGroups []*model.Group) bool {
 }
 
 func selectid(id string) string {
-	db, err := sql.Open("mysql", "mattermost:mattermost@tcp(172.23.12.38:3306)/mattermost")
+	db, err := sql.Open("mysql", "#")
 	if err != nil {
 		panic(err)
 	}
